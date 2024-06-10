@@ -26,12 +26,13 @@ export function Home(){
     return (
     <React.Fragment>
         <h1>Current user: <span>{optimisticName}</span></h1>
-        
+
         <form action={actionFunction}>
             <input type="text" name="name" required/>
+            {/* TODO: Add email input and then add to state */}
             <button type="submit">Update</button>
         </form>
-        {state.error && <p>{state.error.message}</p>}
+        {isPending && state.error && <p>{state.error.message}</p>}
     </React.Fragment>
     )
 }

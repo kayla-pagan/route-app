@@ -7,3 +7,5 @@ export async function updateNameInDB(newName) {
     localStorage.setItem("name", JSON.stringify(newName))
     return newName
 }
+
+// TODO: add firebase api so that there can be a login function to replace the update name in database function

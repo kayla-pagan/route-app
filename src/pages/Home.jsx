@@ -28,9 +28,10 @@ export function Home(){
     <React.Fragment>
         <Header />
         <h1>Current user: <span>{optimisticName}</span></h1>
-
+        {/* add edit icon */}
+        {/* when icon is pressed, then display the form below */}
         <form action={actionFunction}>
-            <input type="text" name="name" required/>
+            <input type="text" name="name" placeholder="enter new username" required/>
             {/* TODO: Add email input and then add to state */}
             <button type="submit">Update</button>
         </form>

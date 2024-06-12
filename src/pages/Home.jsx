@@ -1,5 +1,6 @@
 import React, { useActionState, useOptimistic } from "react";
 import { updateNameInDB } from "../api";
+import { Header } from "../components/Header";
 
 export function Home(){
     const [state, actionFunction, isPending] = useActionState(
@@ -25,6 +26,7 @@ export function Home(){
     
     return (
     <React.Fragment>
+        <Header />
         <h1>Current user: <span>{optimisticName}</span></h1>
 
         <form action={actionFunction}>

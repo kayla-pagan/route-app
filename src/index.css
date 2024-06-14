@@ -1,3 +1,13 @@
 *, *::before, *::after {
   box-sizing: border-box;
 }
+
+.size-6 {
+  width: 25px;
+  height: auto;
+}
+
+.size-6:hover {
+  stroke: grey;
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import React, { useActionState, useOptimistic } from "react";
+import React, { useState, useActionState, useOptimistic } from "react";
 import { updateNameInDB } from "../api";
 import { Header } from "../components/Header";
 
@@ -11,6 +11,7 @@ export function Home(){
         } 
     )
 
+    const [visibleFormID, setVisibleFormID] = useState(null)
     const [optimisticName, setOptimisticName] = useOptimistic(state.name)
 
     async function formAction(prevState, formData){
@@ -20,15 +21,21 @@ export function Home(){
             return {name: newName, error: null}
         } catch (error) {
             return {...prevState, error}
+        } finally {
+            // setVisibleFormID(null)
         }
         
+    }
+
+    function toggleDisplay(formID) {
+        setVisibleFormID(formID)
     }
     
     return (
     <React.Fragment>
         <Header />
         <h1>Current user: <span>{optimisticName}</span></h1>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+        <svg onClick={() => toggleDisplay("username-form")} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             <path 
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
@@ -36,12 +43,15 @@ export function Home(){
             />
         </svg>
 
-        {/* when icon is pressed, then display the form below */}
-        <form action={actionFunction}>
-            <input type="text" name="name" placeholder="enter new username" required/>
-            {/* TODO: Add email input and then add to state */}
-            <button type="submit">Update</button>
-        </form>
+
+        {visibleFormID === "username-form" && (
+                <form action={actionFunction} id="username-form">
+                    <input type="text" name="name" placeholder="enter new username" required/>
+                    {/* TODO: Add email input and then add to state */}
+                    <button type="submit">Update</button>
+                    <button type="button" onClick={() => setVisibleFormID(null)}>Cancel</button>
+                </form>
+            )}
         {isPending && state.error && <p>{state.error.message}</p>}
     </React.Fragment>
     )

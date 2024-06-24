@@ -72,7 +72,7 @@ export function Home(){
         </svg>
         {visibleFormID === "email-form" && (
             <form action={actionFunction} id="email-form">
-                <input type="text" name="email" placeholder="enter new email" required/>
+                <input type="email" name="email" placeholder="enter new email" required/>
                 <button type="submit">Update</button>
                 <button type="button" onClick={() => setVisibleFormID(null)}>Cancel</button>
             </form>

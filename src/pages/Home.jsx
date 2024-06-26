@@ -24,10 +24,13 @@ export function Home(){
 
         try {
             if (formData.get("name")) {
-                const newName = await updateDB(formData.get("name"), null)
+                const newName = await updateDB(formData.get("name"), null, null)
                 return {...prevState, name: newName, error: null}
+            } else if (formData.get("username")) {
+                const newUsername = await updateDB(null, formData.get("username"), null);
+                return { ...prevState, username: newUsername, error: null };
             } else if (formData.get("email")) {
-                const newEmail = await updateDB(null, formData.get("email"))
+                const newEmail = await updateDB(null, null, formData.get("email"))
                 return {...prevState, email: newEmail, error: null}
             }
         } catch (error) {
@@ -46,7 +49,7 @@ export function Home(){
     <React.Fragment>
         <Header />
         
-        <h1>Current user: <span>{optimisticValue.name}</span></h1>
+        <h1>Name: <span>{optimisticValue.name}</span></h1>
         <svg onClick={() => toggleDisplay("name-form")} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             <path 
                 strokeLinecap="round" 
@@ -62,7 +65,7 @@ export function Home(){
                 </form>
             )}
 
-        <h1>Current user: <span>{optimisticValue.name}</span></h1>
+        <h1>Username: <span>{optimisticValue.name}</span></h1>
         <svg onClick={() => toggleDisplay("username-form")} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             <path 
                 strokeLinecap="round" 
@@ -79,7 +82,7 @@ export function Home(){
             )}    
 
 
-        <h1>Current email: <span>{optimisticValue.email}</span></h1>
+        <h1>Email: <span>{optimisticValue.email}</span></h1>
         <svg onClick={() => toggleDisplay("email-form")} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             <path 
                 strokeLinecap="round" 

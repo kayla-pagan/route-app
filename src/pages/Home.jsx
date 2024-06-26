@@ -17,10 +17,13 @@ export function Home(){
     const [optimisticValue, setOptimisticValue] = useOptimistic(state)
 
     async function formAction(prevState, formData){
-        setOptimisticValue({ 
-            ...prevState, name: formData.get("name") || 
-            prevState.name, email: formData.get("email") || 
-            prevState.email })
+        const newValues = {
+            name: formData.get("name") || prevState.name,
+            username: formData.get("username") || prevState.username,
+            email: formData.get("email") || prevState.email
+        };
+
+        setOptimisticValue({ ...prevState, ...newValues });
 
         try {
             if (formData.get("name")) {
@@ -65,7 +68,7 @@ export function Home(){
                 </form>
             )}
 
-        <h1>Username: <span>{optimisticValue.name}</span></h1>
+        <h1>Username: <span>{optimisticValue.username}</span></h1>
         <svg onClick={() => toggleDisplay("username-form")} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
             <path 
                 strokeLinecap="round" 

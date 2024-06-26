@@ -1,4 +1,4 @@
-export async function updateDB(newName, newEmail) {
+export async function updateDB(newName, newUsername, newEmail) {
     // Sleep for 1500ms to mimic an API call round trip
     await new Promise(resolve => setTimeout(resolve, 1500))
 
@@ -8,6 +8,9 @@ export async function updateDB(newName, newEmail) {
         }
         localStorage.setItem("name", JSON.stringify(newName))
         return newName
+    } else if (newUsername) {
+        localStorage.setItem("username", JSON.stringify(newUsername))
+        return newUsername
     } else if (newEmail) {
         localStorage.setItem("email", JSON.stringify(newEmail))
         return newEmail
